@@ -1,6 +1,13 @@
 # Some simple code for working with NYT polling data.
+
 library(tidyverse)
 
+# Often useful to save all the downloaded data in a perminent copy, which I
+# generally call "orig" in order to avoid having to download it again and again.
+# Note that you can pass urls directly to read_csv(). To find the appropriate
+# GitHub location, you need to find the right poll and then click on the Raw
+# button. Note that I just got the col_types information from the R message
+# after I tried to download with just the file argument.
 
 orig <- read_csv(file = "https://raw.githubusercontent.com/TheUpshot/2018-live-poll-results/master/data/elections-poll-me02-3.csv",
                  col_types =  cols(
@@ -12,5 +19,23 @@ orig <- read_csv(file = "https://raw.githubusercontent.com/TheUpshot/2018-live-p
                    final_weight = col_double(),
                    timestamp = col_datetime(format = "")))
 
-x <- orig %>% 
-  select(response, educ, race_edu, age_combined, final_weight)
+# Now that we have the data, we can start to play with it. How might I calculate
+# some of the key numbers from the target table?
+
+# Calculate that 79 people in the poll had a post grad degree.
+
+# Calcualte that those 79 were 11% of the sample.
+
+# Do the same two calculations for H.S. Grad or Less row.
+
+# 
+
+orig %>% 
+  select(response, educ, final_weight) %>% 
+  group_by(educ, response) %>% 
+  summarize(raw_n = n(),
+            weighted_n = sum(final_weight)) %>% 
+  filter(educ == "Graduate or Professional Degree") %>% 
+  spread(key = response, value = n) %>% 
+  mutate(total = `3` + `5` + Dem + Rep + Und) %>% 
+  mutate(dem_per = Dem/total)
