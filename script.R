@@ -20,7 +20,8 @@ orig <- read_csv(file = "https://raw.githubusercontent.com/TheUpshot/2018-live-p
                    timestamp = col_datetime(format = "")))
 
 # Now that we have the data, we can start to play with it. How might I calculate
-# some of the key numbers from the target table?
+# some of the key numbers from the target table? Hint: the only three variables we
+# need are response, educ and final_weight.
 
 # Calculate that 79 people in the poll had a post grad degree.
 
@@ -28,5 +29,10 @@ orig <- read_csv(file = "https://raw.githubusercontent.com/TheUpshot/2018-live-p
 
 # Do the same two calculations for H.S. Grad or Less row.
 
-# 
+# How many individuals have post grad education and prefer the Dem?
+
+# What percentage is this of the Post Grad row?
+
+# Argg! Why don't we get 53% as the Times reports? Think about weighting . . .
+
 
