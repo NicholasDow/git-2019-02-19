@@ -30,12 +30,3 @@ orig <- read_csv(file = "https://raw.githubusercontent.com/TheUpshot/2018-live-p
 
 # 
 
-orig %>% 
-  select(response, educ, final_weight) %>% 
-  group_by(educ, response) %>% 
-  summarize(raw_n = n(),
-            weighted_n = sum(final_weight)) %>% 
-  filter(educ == "Graduate or Professional Degree") %>% 
-  spread(key = response, value = n) %>% 
-  mutate(total = `3` + `5` + Dem + Rep + Und) %>% 
-  mutate(dem_per = Dem/total)
