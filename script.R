@@ -25,6 +25,10 @@ orig <- read_csv(file = "https://raw.githubusercontent.com/TheUpshot/2018-live-p
 
 # Calculate that 79 people in the poll had a post grad degree.
 
+orig %>% 
+  group_by(educ) %>% 
+  count()
+
 # Calcualte that those 79 were 11% of the sample.
 
 # Do the same two calculations for H.S. Grad or Less row.
